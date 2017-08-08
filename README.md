@@ -37,7 +37,7 @@ _**Steps to start cluster**_
 `runMain akkaseed.worker.WorkerApp 2751` #add additional node at ports 2752 +
 
 
-**4. Run ClientApp ***
+**4. Run ClientApp**
 
 `runMain akkaseed.client.ClientApp`
 
