@@ -27,22 +27,22 @@ _**Steps to start cluster**_
 
 
 
-**To run master:**
+**2. Run master node(s)**
 
-`runMain akkaseed.master.MasterApp 2551`
-
-`runMain akkaseed.master.MasterApp 2552`
+`runMain akkaseed.master.MasterApp 2651` #add additional node at ports 2652 if desired
 
 
-**Run worker**
+**3. Run worker nodes(s)**
 
-`runMain akkaseed.worker.WorkerApp 2551`
-
-`runMain akkaseed.worker.WorkerApp 2552`
+`runMain akkaseed.worker.WorkerApp 2751` #add additional node at ports 2752 +
 
 
+**4. Run ClientApp ***
 
-**Configuring seed nodes with JVM property system as follows:**
+`runMain akkaseed.client.ClientApp`
+
+
+**Configuring seed nodes with JVM properties:**
 
 `-Dakka.cluster.seed-nodes.0=akka.tcp://ClusterSystem@127.0.0.1:2551`
 

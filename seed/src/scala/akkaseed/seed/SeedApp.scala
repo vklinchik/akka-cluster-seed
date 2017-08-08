@@ -5,6 +5,7 @@ import akka.cluster.client.ClusterClientReceptionist
 import com.typesafe.config.ConfigFactory
 
 object SeedApp {
+
   def main(args: Array[String]): Unit = {
 
     val port = if (args.isEmpty) "0" else args(0)
