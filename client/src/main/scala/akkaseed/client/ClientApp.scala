@@ -11,7 +11,7 @@ object ClientApp {
 
   def main(args : Array[String]) {
     val system = ActorSystem("AkkaSeedSenderSystem")
-    val sender = system.actorOf(Props[Sender], name = "sender")
+    val sender = system.actorOf(Props[Sender], name = "client")
 
     val counter = new AtomicInteger
     import system.dispatcher
