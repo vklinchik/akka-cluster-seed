@@ -10,3 +10,5 @@
 /master/target/
 /worker/target/
 /seed/target/
+/api/target/
+/out/
