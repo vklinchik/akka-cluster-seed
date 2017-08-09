@@ -23,23 +23,23 @@ _**Steps to start cluster**_
 
 **1. Start seed node(s)**
 
-`runMain akkaseed.seed.SeedApp 2551` #add additional nodes at ports 2552 and 2553
+`runMain mindriot.akkaseed.seed.SeedApp 2551` #add additional nodes at ports 2552 and 2553
 
 
 
 **2. Run master node(s)**
 
-`runMain akkaseed.master.MasterApp 2651` #add additional node at ports 2652 if desired
+`runMain mindriot.akkaseed.master.MasterApp 2651` #add additional node at ports 2652 if desired
 
 
 **3. Run worker nodes(s)**
 
-`runMain akkaseed.worker.WorkerApp 2751` #add additional node at ports 2752 +
+`runMain mindriot.akkaseed.worker.WorkerApp 2751` #add additional node at ports 2752 +
 
 
 **4. Run ClientApp**
 
-`runMain akkaseed.client.ClientApp`
+`runMain mindriot.akkaseed.client.ClientApp`
 
 
 **Configuring seed nodes with JVM properties:**

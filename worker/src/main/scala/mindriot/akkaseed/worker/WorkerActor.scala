@@ -1,4 +1,4 @@
-package akkaseed.worker
+package mindriot.akkaseed.worker
 
 import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Props, RootActorPath}
 import akka.cluster.{Cluster, Member, MemberStatus}

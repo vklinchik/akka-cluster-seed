@@ -1,4 +1,4 @@
-package akkaseed.worker
+package mindriot.akkaseed.worker
 
 import language.postfixOps
 import akka.actor.ActorSystem

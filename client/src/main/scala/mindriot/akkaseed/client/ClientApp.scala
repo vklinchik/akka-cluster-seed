@@ -1,4 +1,4 @@
-package akkaseed.client
+package mindriot.akkaseed.client
 
 import java.util.concurrent.atomic.AtomicInteger
 

@@ -1,5 +1,4 @@
 import sbt._
-import sbt.Keys._
 
 val akkaVersion = "2.5.3"
 
@@ -10,11 +9,11 @@ lazy val akkaDeps = Seq(
   "com.typesafe.akka" %% "akka-cluster-tools"         % akkaVersion,
   "com.typesafe.akka" %% "akka-contrib"               % akkaVersion,
   "com.typesafe.akka" %% "akka-testkit"               % akkaVersion   % "test",
-  "com.typesafe.akka" %  "akka-cluster-metrics_2.11"  % akkaVersion
+  "com.typesafe.akka" %% "akka-cluster-metrics"       % akkaVersion
 )
 
 lazy val libraryDeps = Seq(
-  "org.scalatest"     %% "scalatest"          % "2.2.4"       % "test"
+  "org.scalatest"     %% "scalatest"                  % "3.0.1"       % "test"
 )
 
 lazy val allDeps = akkaDeps ++ libraryDeps
@@ -22,7 +21,7 @@ lazy val allDeps = akkaDeps ++ libraryDeps
 lazy val commonSettings = Seq(
   name := """akka-cluster-seed""",
   version := "1.0",
-  scalaVersion := "2.11.11",
+  scalaVersion := "2.12.3",
   libraryDependencies := allDeps
 )
 
@@ -32,6 +31,7 @@ lazy val commons =
     .settings(
       name := "commons"
     )
+
 lazy val seed =
   (project in file("seed"))
     .settings(commonSettings: _*)

@@ -1,4 +1,4 @@
-package akkaseed.client
+package mindriot.akkaseed.client
 
 import akka.actor.{Actor, ActorLogging, ActorPath}
 import akka.cluster.client.{ClusterClient, ClusterClientSettings}

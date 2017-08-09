@@ -1,4 +1,4 @@
-package akkaseed.master
+package mindriot.akkaseed.master
 
 import akka.actor.{ActorSystem, Props}
 import akka.cluster.client.ClusterClientReceptionist

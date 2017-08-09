@@ -1,4 +1,4 @@
-package akkaseed.master
+package mindriot.akkaseed.master
 
 import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Cancellable, Props, Terminated}
 import akka.util.Timeout
