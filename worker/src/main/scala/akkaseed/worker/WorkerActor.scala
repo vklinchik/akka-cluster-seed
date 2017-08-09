@@ -1,12 +1,17 @@
 package akkaseed.worker
 
-import akka.actor.{Actor, ActorLogging, RootActorPath}
+import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Props, RootActorPath}
 import akka.cluster.{Cluster, Member, MemberStatus}
 import akka.cluster.ClusterEvent.{CurrentClusterState, MemberUp}
-
 import akkaseed.Protocol._
 
-class Worker extends Actor with ActorLogging {
+object WorkerActor {
+  def apply()(implicit system: ActorSystem): ActorRef = {
+    system.actorOf(Props[WorkerActor], name = "worker")
+  }
+}
+
+class WorkerActor extends Actor with ActorLogging {
 
   val cluster = Cluster(context.system)
 

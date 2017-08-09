@@ -1,6 +1,6 @@
 package akkaseed.master
 
-import akka.actor.{Actor, ActorLogging, ActorRef, Cancellable, Terminated}
+import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Cancellable, Props, Terminated}
 import akka.util.Timeout
 import akka.pattern.pipe
 import akka.pattern.ask
@@ -11,7 +11,13 @@ import akkaseed.Protocol.{SampleTask, TaskFailed, TaskResult, WorkerRegistration
 import scala.concurrent.ExecutionContext.Implicits.global
 import akkaseed.RandomString
 
-class Master extends Actor with ActorLogging with RandomString {
+object MasterActor {
+  def apply()(implicit system: ActorSystem): ActorRef = {
+    system.actorOf(Props[MasterActor], name = "master")
+  }
+}
+
+class MasterActor extends Actor with ActorLogging with RandomString {
 
   private val system = this.context.system
 

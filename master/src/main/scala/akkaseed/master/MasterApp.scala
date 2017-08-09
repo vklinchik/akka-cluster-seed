@@ -14,8 +14,8 @@ object MasterApp {
       withFallback(ConfigFactory.parseString("akka.cluster.roles = [master]")).
       withFallback(ConfigFactory.load())
 
-    val system = ActorSystem("AkkaSeedSystem", config)
-    val master = system.actorOf(Props[Master], name = "master")
+    implicit val system = ActorSystem("AkkaSeedSystem", config)
+    val master = MasterActor()
     ClusterClientReceptionist(system).registerService(master)
   }
 }
