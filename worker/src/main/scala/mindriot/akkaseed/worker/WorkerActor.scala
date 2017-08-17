@@ -27,13 +27,10 @@ class WorkerActor extends Actor with ActorLogging {
 
   def receive = {
 
-    case EmptyTask => {
-      log.info("************** Empty task - nothing to do")
-    }
-
-    case SampleTask(text) => {
-      val result = text.toUpperCase
-      log.info(s"*** XXXXXXXXXXXX *** Worker has processed sample task '$text' into '$result'")
+    case batch: Batch => {
+      //val result = text.toUpperCase
+      processBatch(batch)
+      log.info(s"*** XXXXXXXXXXXX *** Worker has processed batch with ${batch.groups.size} group(s)")
       sender() ! TaskResult(text.toUpperCase)
     }
 
@@ -55,5 +52,9 @@ class WorkerActor extends Actor with ActorLogging {
     if (member.hasRole("master")) {
       context.actorSelection(RootActorPath(member.address) / "user" / "master") ! WorkerRegistration
     }
+  }
+
+  private def processBatch(batch: Batch) = {
+
   }
 }

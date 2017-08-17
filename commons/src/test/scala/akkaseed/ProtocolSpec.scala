@@ -1,7 +1,7 @@
 package akkaseed
 
 import org.scalatest.{Matchers, WordSpec}
-import spray.json._
+import spray.json.JsString
 import Protocol._
 
 

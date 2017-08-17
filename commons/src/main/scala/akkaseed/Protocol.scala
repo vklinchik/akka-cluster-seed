@@ -12,7 +12,15 @@ object Protocol {
     case object Mixed extends TaskType
   }
 
+  object ResultType {
+    trait ResultType
+    case object Success extends ResultType
+    case object Failure extends ResultType
+    case object Warning extends ResultType
+  }
+
   import TaskType._
+  import ResultType._
 
   trait Task {
     def taskType: TaskType
@@ -32,9 +40,38 @@ object Protocol {
     }
   }
 
+
+  trait Result {
+    def resultType: ResultType
+  }
+
+
+  trait ResultTypeAnalyzer {
+
+    def isSuccess[T <: Result](results: Set[T]): Boolean = {
+      results.forall(result => result.resultType == Success && result.resultType != Failure && result.resultType != Warning)
+    }
+
+    def isSuccessWithWarning[T <: Result](results: Set[T]): Boolean = {
+      results.forall(result => result.resultType == Success || result.resultType != Warning && result.resultType != Failure)
+    }
+
+    def containsFailure[T <: Result](results: Set[T]): Boolean = !isSuccessWithWarning(results)
+
+    def getResultType[T <: Result](results: Set[T]): ResultType = {
+      if (isSuccess(results)) {
+        ResultType.Success
+      } else if (isSuccessWithWarning(results)) {
+        ResultType.Warning
+      } else {
+        ResultType.Failure
+      }
+    }
+  }
+
   final case class UnitOfWork(taskType: TaskType, payload: JsValue) extends Task
 
-  final case class TaskGroup(units: Set[UnitOfWork]) extends Task with TaskTypeAnalyzer{
+  final case class TaskGroup(units: Set[UnitOfWork]) extends Task with TaskTypeAnalyzer {
     val taskType: TaskType = getTaskType(units)
   }
 
@@ -42,14 +79,27 @@ object Protocol {
     val taskType: TaskType = getTaskType(groups)
   }
 
+  final case class UnitOfWorkResult(unit: UnitOfWork, resultType: ResultType) extends Result
 
-  case object EmptyTask extends Task { val taskType = Sequential }
-  final case class SampleTask(text: String) extends Task { val taskType = Mixed}
-  //final case class Batch(tasks: Set[Task]) extends Task
+  final case class TaskGroupResult(group: TaskGroup) extends Result with ResultTypeAnalyzer {
+    lazy val resultType: ResultType = getResultType(group.units)
+  }
 
-  final case class TaskResult(text: String)
-  final case class TaskFailed(task: Task, reason: String)
-  //TODO: add batch result and failure
+  final case class BatchResult(batch: Batch) extends Result with ResultTypeAnalyzer {
+    lazy val resultType: ResultType = getResultType(batch.groups)
+
+    def markAllAsFailure(): BatchResult = {
+      val groups = batch.groups
+
+      groups.map{ group =>
+        val units = group.units
+        units.map{ unit =>
+
+        }
+      }
+    }
+  }
+
 
 
   case object WorkerRegistration
